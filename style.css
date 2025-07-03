@@ -1,59 +1,96 @@
 body {
   margin: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   height: 100vh;
+  justify-content: center;
   align-items: center;
-  transition: .4s;
+  background-color: white;
+  transition: background-color 0.4s;
+  font-family: sans-serif;
 }
 
+/* Toggle Styles */
 .input {
-  visibility: hidden;
+  display: none;
 }
 
 .label {
-  position: absolute;
+  position: relative;
   width: 80px;
   height: 40px;
-  background-color: lightgray;
+  background-color: #ccc;
   border-radius: 20px;
   cursor: pointer;
+  margin-bottom: 40px;
+  transition: background-color 0.4s;
 }
 
 .circle {
   width: 34px;
-  background-color: white;
   height: 34px;
   border-radius: 50%;
-  top: 3px;
   position: absolute;
+  top: 3px;
   left: 3px;
-  animation: toggleOff 0.4s linear forwards;
+  background-color: yellow;
+  transition: transform 0.4s, background-color 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: black;
 }
 
+/* Add icon inside circle */
+.circle::before {
+  content: "☀️"; /* Default is sun */
+  transition: 0.4s;
+}
+
+/* Toggle ON styles */
 .input:checked + .label {
-  background-color: white;
+  background-color: #444;
 }
 
 .input:checked + .label .circle {
-  animation: toggleOn 0.4s linear forwards;
-  background-color: black;
+  transform: translateX(40px);
+  background-color: #888;
+  color: white;
 }
 
-@keyframes toggleOn {
-  0% {                 
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(40px);
-  }
+/* Change icon to moon */
+.input:checked + .label .circle::before {
+  content: "🌙";
 }
 
-@keyframes toggleOff {
-  0% {
-    transform: translateX(40px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+/* TEXT STYLES */
+.text {
+  font-size: 2rem;
+  transition: opacity 0.4s;
+  position: absolute;
+  top: 60%;
+  text-align: center;
+}
+
+/* Light Mode Text */
+.light-text {
+  color: #333;
+  opacity: 1;
+}
+
+/* Dark Mode Text (Initially Hidden) */
+.dark-text {
+  color: cyan;
+  text-shadow: 0 0 10px cyan, 0 0 20px cyan;
+  opacity: 0;
+}
+
+/* Toggle text visibility */
+.input:checked ~ .light-text {
+  opacity: 0;
+}
+
+.input:checked ~ .dark-text {
+  opacity: 1;
 }

@@ -22,3 +22,8 @@ inputEl.addEventListener("input", () => {
 function updateLocalStorage() {
   localStorage.setItem("mode", JSON.stringify(inputEl.checked));
 }
+const toggle = document.getElementById('dark-mode');
+
+toggle.addEventListener('change', () => {
+  document.body.style.backgroundColor = toggle.checked ? '#111' : '#fff';
+});
